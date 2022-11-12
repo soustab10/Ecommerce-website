@@ -104,7 +104,7 @@
   {%endif%}
 
   <center>
-    <h3 class='alert alert-success'>Send Us Your Valuable Feedback !</h3>
+    <h3 class='alert alert-success'>Send Us Your Valuable Review !</h3>
 
 
     <form method="post">
@@ -112,17 +112,17 @@
     <ul class="form-style-1">
         <li>
             <label>Name <span class="required">*</span></label>
-            {% render_field feedbackForm.name class="field-long"  %}
+            {% render_field ReviewForm.name class="field-long"  %}
 
         </li>
 
         <li>
-            <label>Your Feedback <span class="required">*</span></label>
-            {% render_field feedbackForm.feedback id="field5" class="field-long field-textarea"  %}
+            <label>Your Review <span class="required">*</span></label>
+            {% render_field ReviewForm.Review id="field5" class="field-long field-textarea"  %}
 
         </li>
         <li>
-            <input type="submit" value="Send Feedback" />
+            <input type="submit" value="Send Review" />
         </li>
     </ul>
     </form>
