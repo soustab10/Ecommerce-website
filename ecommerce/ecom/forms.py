@@ -15,12 +15,18 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model=models.Customer
         fields=['address','mobile','profile_pic']
+        
+        
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model=models.Category
+        fields=['c_title','c_description']
 
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model=models.Product
-        fields=['p_name','p_rating','p_description','p_buycount','p_category','p_image']
+        fields=['p_name','p_rating','p_description','p_category','p_image']
 
 #address of shipment
 class AddressForm(forms.Form):

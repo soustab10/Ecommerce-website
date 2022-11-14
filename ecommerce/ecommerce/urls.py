@@ -25,7 +25,6 @@ urlpatterns = [
     path('aboutus', views.aboutus_view),
     path('contactus', views.contactus_view,name='contactus'),
     path('search', views.search_view,name='search'),
-    path('send-Review', views.send_Review_view,name='send-Review'),
     path('view-Review', views.view_Review_view,name='view-Review'),
 
     path('adminclick', views.adminclick_view),

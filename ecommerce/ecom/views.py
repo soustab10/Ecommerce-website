@@ -46,22 +46,18 @@ def customer_signup_view(request):
         return HttpResponseRedirect('customerlogin')
     return render(request,'ecom/customersignup.html',context=mydict)
 
-#-----------for checking user iscustomer
 def is_customer(user):
     return user.groups.filter(name='CUSTOMER').exists()
 
 
-
-#---------AFTER ENTERING CREDENTIALS WE CHECK WHETHER USERNAME AND PASSWORD IS OF ADMIN,CUSTOMER
+# Credentials Entered check if user is customer or merchant
 def afterlogin_view(request):
     if is_customer(request.user):
         return redirect('customer-home')
     else:
         return redirect('admin-dashboard')
 
-#---------------------------------------------------------------------------------
-#------------------------ ADMIN RELATED VIEWS START ------------------------------
-#---------------------------------------------------------------------------------
+
 @login_required(login_url='adminlogin')
 def admin_dashboard_view(request):
     # for cards on dashboard
@@ -179,7 +175,6 @@ def delete_order_view(request,pk):
     order.delete()
     return redirect('admin-view-booking')
 
-# for changing status of order (pending,delivered...)
 @login_required(login_url='adminlogin')
 def update_order_view(request,pk):
     order=models.Orders.objects.get(id=pk)
@@ -200,11 +195,7 @@ def view_Review_view(request):
 
 
 
-#---------------------------------------------------------------------------------
-#------------------------ PUBLIC CUSTOMER RELATED VIEWS START ---------------------
-#---------------------------------------------------------------------------------
 def search_view(request):
-    # whatever user write in search box we get in query
     query = request.GET['query']
     products=models.Product.objects.all().filter(name__icontains=query)
     if 'product_ids' in request.COOKIES:
@@ -226,7 +217,6 @@ def search_view(request):
 def add_to_cart_view(request,pk):
     products=models.Product.objects.all()
 
-    #for cart counter, fetching products ids added by customer from cookies
     if 'product_ids' in request.COOKIES:
         product_ids = request.COOKIES['product_ids']
         counter=product_ids.split('|')
@@ -273,9 +263,9 @@ def cart_view(request):
             product_id_in_cart=product_ids.split('|')
             products=models.Product.objects.all().filter(id__in = product_id_in_cart)
 
-            #for total price shown in cart
+            #for total p_price shown in cart
             for p in products:
-                total=total+p.price
+                total=total+p.p_price
     return render(request,'ecom/cart.html',{'products':products,'total':total,'product_count_in_cart':product_count_in_cart})
 
 
@@ -296,9 +286,9 @@ def remove_from_cart_view(request,pk):
         product_id_in_cart=list(set(product_id_in_cart))
         product_id_in_cart.remove(str(pk))
         products=models.Product.objects.all().filter(id__in = product_id_in_cart)
-        #for total price shown in cart after removing product
+        #for total p_price shown in cart after removing product
         for p in products:
-            total=total+p.price
+            total=total+p.p_price
 
         #  for update coookie value after removing product id in cart
         value=""
@@ -324,9 +314,6 @@ def send_Review_view(request):
     return render(request, 'ecom/send_Review.html', {'ReviewForm':ReviewForm})
 
 
-#---------------------------------------------------------------------------------
-#------------------------ CUSTOMER RELATED VIEWS START ------------------------------
-#---------------------------------------------------------------------------------
 @login_required(login_url='customerlogin')
 @user_passes_test(is_customer)
 def customer_home_view(request):
@@ -369,7 +356,7 @@ def customer_address_view(request):
             email = addressForm.cleaned_data['Email']
             mobile=addressForm.cleaned_data['Mobile']
             address = addressForm.cleaned_data['Address']
-            #for showing total price on payment page.....accessing id from cookies then fetching  price of product from db
+           
             total=0
             if 'product_ids' in request.COOKIES:
                 product_ids = request.COOKIES['product_ids']
@@ -377,7 +364,7 @@ def customer_address_view(request):
                     product_id_in_cart=product_ids.split('|')
                     products=models.Product.objects.all().filter(id__in = product_id_in_cart)
                     for p in products:
-                        total=total+p.price
+                        total=total+p.p_price
 
             response = render(request, 'ecom/payment.html',{'total':total})
             response.set_cookie('email',email)
@@ -389,8 +376,6 @@ def customer_address_view(request):
 
 
 
-# here we are just directing to this view...actually we have to check whther payment is successful or not
-#then only this view should be accessed
 @login_required(login_url='customerlogin')
 def payment_success_view(request):
     # Here we will place order | after successful payment
@@ -482,7 +467,7 @@ def download_invoice_view(request,orderID,productID):
 
         'productName':product.name,
         'productImage':product.product_image,
-        'productPrice':product.price,
+        'productp_price':product.p_price,
         'productDescription':product.description,
 
 
