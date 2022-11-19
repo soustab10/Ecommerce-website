@@ -1,7 +1,7 @@
 # Ecommerce-website
 
 ### Overview:
-![BoldStore_page-0001](https://user-images.githubusercontent.com/95632583/202850228-377778af-213d-479a-a204-0827a279cb0b.jpg)
+
 ![BoldStore_page-0002](https://user-images.githubusercontent.com/95632583/202850250-8664b716-6ba9-4ca2-a85d-c2cbf08e1da5.jpg)
 ![BoldStore_page-0003](https://user-images.githubusercontent.com/95632583/202850254-fd1f07b9-39d4-4e56-829c-7b51ea667c65.jpg)
 ![BoldStore_page-0004](https://user-images.githubusercontent.com/95632583/202850260-e32966d3-367d-4832-92a3-b3348c8f04ec.jpg)
