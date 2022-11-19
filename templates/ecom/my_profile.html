@@ -1,0 +1,68 @@
+{% extends 'ecom/homebase.html' %}
+{% load static %}
+{% block content %}
+
+
+<style media="screen">
+  body {
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+  .button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #fb8500;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  }
+
+  .base-container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    width:100%;
+  }
+.profile-info {
+  font-size: 24px;
+  width:fit-content;
+}
+
+
+
+</style>
+<br><br><br>
+
+<div class="base-container">
+
+ <div class="pic-container">
+            <img src="{% static customer.profile_pic.url %}"   alt="profile pic" class="img-rounded img-responsive" style="height:400px; width:auto; margin-left:200px" />
+        </div>
+
+        <div class="info container" style="margin-left:500px">
+            
+                <p class="profile-info">Hello, {{request.user}}</p> 
+                <p class="profile-info" title="Address"><i class="fa fa-solid fa-map-pin"></i>{{customer.address}} </p>
+            
+            <p class="profile-info" title="Phone Number"> <i class="fa fa-solid fa-phone"></i> {{customer.mobile}}
+            </p>
+            <div class="profile-info" style="text-align: center;">
+              <a href="/edit-profile"><button class="button" ><span>Edit Profile </span></button></a>
+            </div>
+        </div>
+
+</div>
+<br>
+
+<br><br><br><br><br><br>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>BoldStore</title>
+
+
+</head>
+<style>
+  body {
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif !important;
+}
+</style>
+<body style="background-color: #fff;">
+
+  {%if request.user.is_authenticated%}
+    {% include "ecom/customer_navbar.html" %}
+  {%else%}
+    {% include "ecom/navbar.html" %}
+  {%endif%}
+
+  <center>
+    <h3 class='alert alert-success'>Help us grow. Send us your valuable feedback !</h3>
+
+    <form method="POST">
+      <!-- Very Important csrf Token -->
+      {% csrf_token %}
+      <div class="form-group">
+        <p>
+        <div>{{ form.as_p }}</div>
+        </p>
+        <br>
+        <input type="submit" value="Send Message" class='btn btn-primary' style="background-color:#023047">
+      </div>
+    </form>
+  </center>
+  {% include "ecom/footer.html" %}
+</body>
+
+
+</html>
