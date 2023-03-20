@@ -1,4 +1,6 @@
-# Ecommerce-website
+# BoldStore:
+
+### Ecommerce Website under Dr. Amrita Chaturvedi, Assistant Professor CSE (IIT BHU)
 
 ### Overview:
 
